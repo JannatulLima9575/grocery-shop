@@ -6,6 +6,7 @@ import { useState } from 'react';
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   // Top bar routes
   const topRoutes = [
@@ -35,9 +36,9 @@ export default function Navbar() {
       label: 'Pages',
       hasDropdown: true,
       subRoutes: [
-        { href: '/privacy', label: 'Privacy Policy' },
-        { href: '/terms', label: 'Terms & Conditions' },
-        { href: '/faq', label: 'FAQ' },
+        { href: '/pages/privacy', label: 'Privacy Policy' },
+        { href: '/pages/terms', label: 'Terms & Conditions' },
+        { href: '/pages/faq', label: 'FAQ' },
       ],
     },
   ];
@@ -162,8 +163,69 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Cart & User Icons */}
+            {/* Cart & User Icons + Login/Register + Profile Avatar */}
             <div className="hidden lg:flex items-center space-x-4">
+              {/* Login and Register Buttons */}
+              <Link
+                href="/login"
+                className="px-4 py-1 border border-green-600 text-green-600 rounded hover:bg-green-50 transition"
+              >
+                Login
+              </Link>
+              <Link
+                href="/signup"
+                className="px-4 py-1 border border-green-600 text-green-600 rounded hover:bg-green-50 transition"
+              >
+                Register
+              </Link>
+
+              {/* Profile Avatar */}
+              <div className="relative">
+                <button
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="w-10 h-10 rounded-full overflow-hidden border-2 border-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                  aria-label="User menu"
+                >
+                  {/* এখানে তুমি ডায়নামিক ইউজারের প্রোফাইল ছবি বসাবে */}
+                  <img
+                    src="/default-avatar.png"
+                    alt="User Avatar"
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+
+                {/* Dropdown for Profile */}
+                {profileOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg border z-50">
+                    <Link
+                      href="/profile"
+                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      My Profile
+                    </Link>
+                    <Link
+                      href="/dashboard"
+                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={() => {
+                        // এখানে লগআউট ফাংশন কল করতে পারো পরবর্তীতে
+                        alert('Logout clicked');
+                        setProfileOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Cart Icon */}
               <button className="p-2 text-gray-600 hover:text-green-600 transition-colors">
                 <svg
                   className="w-6 h-6"
@@ -179,6 +241,8 @@ export default function Navbar() {
                   />
                 </svg>
               </button>
+
+              {/* User Icon (optional, kept from original) */}
               <button className="p-2 text-gray-600 hover:text-green-600 transition-colors">
                 <svg
                   className="w-6 h-6"

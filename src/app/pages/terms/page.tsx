@@ -1,7 +1,9 @@
+import React from 'react';
+
 const page = () => {
   return (
     <div>
-      <h1>Vegetables Page</h1>
+      <h1>this is tream page</h1>
     </div>
   );
 };

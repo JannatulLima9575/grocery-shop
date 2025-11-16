@@ -1,5 +1,7 @@
 const page = () => {
-  return <div></div>;
+  return <div>
+    <h1>dairy bakery page</h1>
+  </div>;
 };
 
 export default page;
