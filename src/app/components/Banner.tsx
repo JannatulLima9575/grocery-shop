@@ -8,19 +8,19 @@ const slides = [
 id: 1,
 title: "Live KachaBazer Price Tracker",
 subtitle: "Check today’s latest market prices instantly",
-image: "/public/Hero/Banner1.jpg",
+image: "/Hero/Banner1.jpg",
 },
 {
 id: 2,
 title: "Fresh Market Updates",
 subtitle: "Real-time vegetable, fish, and meat prices",
-image: "/public/Hero/Banner2.jpg",
+image: "/Hero/Banner2.jpg",
 },
 {
 id: 3,
 title: "Smart Shopping Decisions",
 subtitle: "Decide when to buy with accurate price insights",
-image: "/public/Hero/Banner3.jpg",
+image: "/Hero/Banner3.jpg",
 },
 ];
 
