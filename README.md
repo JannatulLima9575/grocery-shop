@@ -56,7 +56,6 @@ Built using the **MERN Stack**, with **Next.js + TypeScript** on the frontend fo
 * Node.js
 * Express.js
 * MongoDB
-* Mongoose
 
 ### Other Tools
 
@@ -83,100 +82,6 @@ Built using the **MERN Stack**, with **Next.js + TypeScript** on the frontend fo
 
 ---
 
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/local-market-tracker.git
-```
-
-### 2️⃣ Install Dependencies
-
-#### Frontend
-
-```bash
-cd client
-npm install
-```
-
-#### Backend
-
-```bash
-cd server
-npm install
-```
-
----
-
-## ▶️ Running the Project
-
-### Start Backend Server
-
-```bash
-cd server
-npm start
-```
-
-### Start Frontend Server
-
-```bash
-cd client
-npm run dev
-```
-
-* Frontend: [http://localhost:3000](http://localhost:3000)
-* Backend: [http://localhost:5000](http://localhost:5000)
-
----
-
-## 🔐 Environment Variables
-
-### Frontend (.env)
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000
-```
-
-### Backend (.env)
-
-```env
-MONGO_URI=your_mongo_connection_string
-JWT_SECRET=your_secret_key
-PORT=5000
-```
-
----
-
-## 🛠 Example API Endpoints
-
-### Prices
-
-* Get all prices
-
-  ```http
-  GET /api/prices
-  ```
-* Add price (Seller only)
-
-  ```http
-  POST /api/prices/add
-  ```
-
-### Authentication
-
-* Register user
-
-  ```http
-  POST /api/auth/register
-  ```
-* Login user
-
-  ```http
-  POST /api/auth/login
-  ```
-
----
 
 ## 📊 Future Improvements
 
@@ -184,14 +89,6 @@ PORT=5000
 * Location-based market price suggestions
 * Push notifications for price changes
 * Seller verification system
-
----
-
-## 👨‍💻 Author
-
-Developed using **MERN Stack + Next.js + TypeScript**.
-
-Customize this section with your name and GitHub profile link.
 
 ---
 
