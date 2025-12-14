@@ -8,7 +8,7 @@ export default function Footer() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <footer className="bg-gray-100 dark:bg-darkbg text-gray-700 dark:text-gray-200 py-10 transition-colors">
+    <footer className="bg-gray-100 py-10 transition-colors">
       <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
 
         {/* About Section */}
