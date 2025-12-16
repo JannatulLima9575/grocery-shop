@@ -1,8 +1,22 @@
+import Banner from "./components/Banner";
+import CommunityReviews from "./components/CommunityReviews";
+import FeaturedItems from "./components/FeaturedItems";
+import LivePriceList from "./components/LivePriceList";
+import MarketHighlights from "./components/MarketHighlights";
+import MarketNews from "./components/MarketNews";
+import PriceComparison from "./components/PriceComparison";
+
 export default function Home() {
   return (
     <section>
       <div>
-        <h1>Welcome to Kacha Bazar</h1>
+        <Banner/>
+        <MarketHighlights />
+        <LivePriceList />
+        <PriceComparison/>
+        <FeaturedItems/>
+        <MarketNews/>
+        <CommunityReviews/>
       </div>
     </section>
   );
