@@ -65,7 +65,7 @@ const Signup = () => {
             <div>
               <div className="flex items-center mb-2">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                   Full Name
                 </label>
               </div>
