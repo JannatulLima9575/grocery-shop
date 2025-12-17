@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 
-
 interface PriceItem {
   product: string;
   price: number;
@@ -47,9 +46,7 @@ const LivePriceList = () => {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  activeTab === tab
-                    ? "bg-green-600 text-white"
-                    : "bg-gray-100"
+                  activeTab === tab ? "bg-green-600 text-white" : "bg-gray-100"
                 }`}
               >
                 {tab}
@@ -89,19 +86,28 @@ const LivePriceList = () => {
           <h3 className="font-semibold mb-4">Filter & Sort</h3>
 
           <div className="space-y-4">
-            <select className="w-full border rounded-lg p-2">
+            <select
+              aria-label="Sort by Price"
+              className="w-full border rounded-lg p-2"
+            >
               <option>Sort by Price</option>
               <option>Low to High</option>
               <option>High to Low</option>
             </select>
 
-            <select className="w-full border rounded-lg p-2">
+            <select
+              aria-label="Sort by Freshness"
+              className="w-full border rounded-lg p-2"
+            >
               <option>Freshness</option>
               <option>Newest First</option>
               <option>Oldest First</option>
             </select>
 
-            <select className="w-full border rounded-lg p-2">
+            <select
+              aria-label="Sort by Popularity"
+              className="w-full border rounded-lg p-2"
+            >
               <option>Popularity</option>
               <option>Most Viewed</option>
               <option>Least Viewed</option>
