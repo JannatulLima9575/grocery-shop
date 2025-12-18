@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import Theme from '../utils/Theme';
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
@@ -269,7 +268,6 @@ export default function Navbar() {
                   />
                 </svg>
               </button>
-              <Theme theme={[{ themeText: 'text-white' }]} />
             </div>
 
             {/* Mobile Menu Button */}
