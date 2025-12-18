@@ -6,7 +6,7 @@ export const products = [
     market: "Karwan Bazar",
     price: 45,
     unit: "kg",
-    image: "/potato.jpg",
+    image: "/hero/RedTomato.avif",
     updatedAt: "10 min ago",
     history: [40, 42, 43, 45]
   },
@@ -17,7 +17,7 @@ export const products = [
     market: "New Market",
     price: 60,
     unit: "kg",
-    image: "/onion.jpg",
+    image: "/Hero/FreshOnion",
     updatedAt: "15 min ago",
     history: [55, 58, 60]
   },
@@ -28,18 +28,18 @@ export const products = [
     market: "Local Market",
     price: 1200,
     unit: "kg",
-    image: "/fish.jpg",
+    image: "/Hero/HilsaFish.jpg",
     updatedAt: "30 min ago",
     history: [1100, 1150, 1200]
   },
     {
     id: "4",
-    name: "Potato",
+    name: "Spring Onion",
     category: "Vegetables",
     market: "Karwan Bazar",
     price: 45,
     unit: "kg",
-    image: "/potato.jpg",
+    image: "/Hero/vegetables-spring-onion.jpg",
     updatedAt: "10 min ago",
     history: [40, 42, 43, 45]
   },
