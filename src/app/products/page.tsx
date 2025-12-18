@@ -1,8 +1,28 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
+import { products } from "@/data/products";
 
 const Products = () => {
+  const [category, setCategory] = useState("All");
+  const [market, setMarket] = useState("All");
+  const [search, setSearch] = useState("");
+
+  const filteredProducts = products.filter((product) => {
+    const matchCategory =
+      category === "All" || product.category === category;
+
+    const matchMarket =
+      market === "All" || product.market === market;
+
+    const matchSearch = product.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    return matchCategory && matchMarket && matchSearch;
+  });
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
 
@@ -18,75 +38,75 @@ const Products = () => {
 
       {/* 🔹 Filter & Search */}
       <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
-
-        {/* Category Filter */}
-        <select className="border rounded-lg px-4 py-2 dark:bg-gray-900">
-          <option>All Categories</option>
-          <option>Vegetables</option>
-          <option>Fish</option>
-          <option>Meat</option>
-          <option>Fruits</option>
+        <select
+        title="Select Category"
+          className="border rounded-lg px-4 py-2 dark:bg-gray-900"
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="All">All Categories</option>
+          <option value="Vegetables">Vegetables</option>
+          <option value="Fish">Fish</option>
+          <option value="Meat">Meat</option>
+          <option value="Fruits">Fruits</option>
         </select>
 
-        {/* Market Filter */}
-        <select className="border rounded-lg px-4 py-2 dark:bg-gray-900">
-          <option>All Markets</option>
-          <option>Karwan Bazar</option>
-          <option>New Market</option>
-          <option>Local Market</option>
+        <select
+        title="Select Market"
+          className="border rounded-lg px-4 py-2 dark:bg-gray-900"
+          onChange={(e) => setMarket(e.target.value)}
+        >
+          <option value="All">All Markets</option>
+          <option value="Karwan Bazar">Karwan Bazar</option>
+          <option value="New Market">New Market</option>
+          <option value="Local Market">Local Market</option>
         </select>
 
-        {/* Search */}
         <input
           type="text"
           placeholder="Search product..."
           className="flex-1 border rounded-lg px-4 py-2 dark:bg-gray-900"
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
       {/* 🔹 Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        {/* Product Card */}
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+        {filteredProducts.map((item) => (
           <div
-            key={item}
+            key={item.id}
             className="bg-white dark:bg-gray-900 border rounded-xl p-4 hover:shadow-lg transition"
           >
-            {/* Image */}
             <div className="relative h-36 mb-4">
               <Image
-                src="/placeholder.png"
-                alt="product"
+                src={item.image}
+                alt={item.name}
                 fill
                 className="object-cover rounded-lg"
               />
             </div>
 
-            {/* Info */}
-            <h3 className="font-semibold text-lg">
-              Potato
-            </h3>
-
-            <p className="text-sm text-gray-500">
-              Karwan Bazar
-            </p>
+            <h3 className="font-semibold text-lg">{item.name}</h3>
+            <p className="text-sm text-gray-500">{item.market}</p>
 
             <p className="text-emerald-600 font-bold mt-1">
-              ৳45 / kg
+              ৳{item.price} / {item.unit}
             </p>
 
             <p className="text-xs text-gray-400 mt-1">
-              Updated 10 min ago
+              Updated {item.updatedAt}
             </p>
 
-            {/* Action */}
             <button className="mt-4 w-full border rounded-lg py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800">
               View Details
             </button>
           </div>
         ))}
 
+        {filteredProducts.length === 0 && (
+          <p className="col-span-full text-center text-gray-500">
+            No products found
+          </p>
+        )}
       </div>
 
       {/* 🔹 Pagination */}
