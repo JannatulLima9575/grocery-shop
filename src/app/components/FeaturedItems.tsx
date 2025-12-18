@@ -16,28 +16,28 @@ const products: Product[] = [
     name: "Fresh Onion",
     price: "৳60 / kg",
     market: "Karwan Bazar",
-    image: "/Hero/Banner1.jpg",
+    image: "/Hero/FreshOnion",
   },
   {
     id: 2,
     name: "Red Tomato",
     price: "৳40 / kg",
     market: "New Market",
-    image: "/Hero/Banner1.jpg",
+    image: "/Hero/RedTomato.avif",
   },
   {
     id: 3,
     name: "Hilsa Fish",
     price: "৳1200 / kg",
     market: "Chandpur Market",
-    image: "/Hero/Banner1.jpg",
+    image: "/Hero/HilsaFish.jpg",
   },
   {
     id: 4,
     name: "Basmati Rice",
     price: "৳95 / kg",
     market: "Local Wholesale",
-    image: "/Hero/Banner1.jpg",
+    image: "/Hero/BasmatiRice.png",
   },
 ];
 
