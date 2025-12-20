@@ -13,7 +13,7 @@ export default function Footer() {
 
         {/* About */}
         <div>
-          <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
+          <h3 className="text-lg font-semibold mb-4 text-green-900 dark:text-gray-100">
             KachaBazer
           </h3>
           <p className="text-sm accent dark:text-gray-400">
