@@ -4,24 +4,24 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const slides = [
-{
-id: 1,
-title: "Live KachaBazer Price Tracker",
-subtitle: "Check today’s latest market prices instantly",
-image: "/Hero/Banner1.jpg",
-},
-{
-id: 2,
-title: "Fresh Market Updates",
-subtitle: "Real-time vegetable, fish, and meat prices",
-image: "/Hero/Banner2.jpg",
-},
-{
-id: 3,
-title: "Smart Shopping Decisions",
-subtitle: "Decide when to buy with accurate price insights",
-image: "/Hero/Banner3.jpg",
-},
+  {
+    id: 1,
+    title: "Live KachaBazer Price Tracker",
+    subtitle: "Check today’s latest market prices instantly",
+    image: "/Hero/Banner1.jpg",
+  },
+  {
+    id: 2,
+    title: "Fresh Market Updates",
+    subtitle: "Real-time vegetable, fish, and meat prices",
+    image: "/Hero/Banner2.jpg",
+  },
+  {
+    id: 3,
+    title: "Smart Shopping Decisions",
+    subtitle: "Decide when to buy with accurate price insights",
+    image: "/Hero/Banner3.jpg",
+  },
 ];
 
 const Banner = () => {
@@ -36,42 +36,53 @@ const Banner = () => {
   }, []);
 
   return (
-    <section className="relative w-full h-[70vh] overflow-hidden">
+    <section className="relative w-full h-[60vh] md:h-[75vh] overflow-hidden bg-gray-950">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
           className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === current ? "opacity-100" : "opacity-0"
+            index === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
+          {/* Background Image */}
           <Image
             src={slide.image}
             alt={slide.title}
             fill
+            priority={index === 0}
             className="w-full h-full object-cover scale-110 animate-zoom"
           />
 
-          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-            <div className="text-center text-white px-4">
-              <h1 className="text-3xl md:text-5xl font-bold mb-4">
+          {/* Centered Content Overlay */}
+          <div className="absolute inset-0 bg-black/40 dark:bg-black/60 flex items-center justify-center">
+            <div className="max-w-4xl mx-auto px-6 text-center text-white">
+              {/* Title */}
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight drop-shadow-2xl animate-fade-in-up">
                 {slide.title}
               </h1>
-              <p className="text-lg md:text-xl">{slide.subtitle}</p>
+              
+              {/* Subtitle */}
+              <p className="text-lg md:text-2xl text-gray-100 dark:text-gray-200 font-medium max-w-2xl mx-auto drop-shadow-lg animate-fade-in-up delay-200">
+                {slide.subtitle}
+              </p>
             </div>
           </div>
         </div>
       ))}
 
-      {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+      {/* Modern Center Dots */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-30">
         {slides.map((_, index) => (
-          <span
+          <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`w-3 h-3 rounded-full cursor-pointer ${
-              index === current ? "bg-green-500" : "bg-white"
+            aria-label={`Go to slide ${index + 1}`}
+            className={`transition-all duration-300 rounded-full ${
+              index === current 
+                ? "w-8 h-2 bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.8)]" 
+                : "w-2 h-2 bg-white/60 hover:bg-white"
             }`}
-          ></span>
+          ></button>
         ))}
       </div>
     </section>
@@ -79,14 +90,3 @@ const Banner = () => {
 };
 
 export default Banner;
-
-/* Tailwind animation (add to globals.css)
-@keyframes zoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.15); }
-}
-
-.animate-zoom {
-  animation: zoom 6s ease-in-out infinite;
-}
-*/
