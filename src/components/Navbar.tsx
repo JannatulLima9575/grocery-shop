@@ -3,142 +3,110 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Sun, Moon } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  Search,
+  ShoppingCart,
+  User,
+  ChevronDown,
+  LogOut,
+  Menu,
+  X,
+  LayoutDashboard,
+} from "lucide-react";
 import { useTheme } from "@/app/providers";
-
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const { theme, toggleTheme } = useTheme();
 
-
-
-  // Top bar routes
-  const topRoutes = [
-    { href: '/about', label: 'About Us' },
-    { href: '/contact', label: 'Contact Us' },
-    { href: '/account', label: 'My Account' },
-  ];
-
-  // Main navigation routes
   const mainRoutes = [
-    { href: '/', label: 'Home' },
+    { href: "/", label: "Home" },
     {
-      href: '/categories',
-      label: 'Categories',
+      href: "#",
+      label: "Categories",
       hasDropdown: true,
       subRoutes: [
-        { href: '/categories/fresh-fruits', label: 'Fresh Fruits' },
-        { href: '/categories/vegetables', label: 'Vegetables' },
-        { href: '/categories/fish-meat', label: 'Fish & Meat' },
-        { href: '/categories/dairy-bakery', label: 'Dairy & Bakery' },
+        { href: "/categories/fresh-fruits", label: "Fresh Fruits" },
+        { href: "/categories/vegetables", label: "Vegetables" },
+        { href: "/categories/fish-meat", label: "Fish & Meat" },
+        { href: "/categories/dairy-bakery", label: "Dairy & Bakery" },
       ],
     },
-    { href: '/products', label: 'Products' },
-    { href: '/about', label: 'AboutUs' },
-    {
-      href: '/pages',
-      label: 'Pages',
-      hasDropdown: true,
-      subRoutes: [
-        { href: '/pages/privacy', label: 'Privacy Policy' },
-        { href: '/pages/terms', label: 'Terms & Conditions' },
-        { href: '/pages/faq', label: 'FAQ' },
-      ],
-    },
+    { href: "/products", label: "Products" },
   ];
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="bg-gray-800 text-white text-sm py-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            {/* Left: Contact Info */}
-            <div className="mb-2 md:mb-0">
-              <span>
-                We are available 24/7, Need help? Call Us:{' '}
-                <strong>+01234560352</strong>
-              </span>
-            </div>
-
-            {/* Right: Top Links */}
-            <div className="flex items-center space-x-4">
-              {topRoutes.map((route, index) => (
-                <div key={route.href} className="flex items-center">
-                  <Link
-                    href={route.href}
-                    className="hover:text-green-300 transition-colors"
-                  >
-                    {route.label}
-                  </Link>
-                  {index < topRoutes.length - 1 && (
-                    <span className="mx-2 text-gray-400">|</span>
-                  )}
-                </div>
-              ))}
-            </div>
+      {/* Top Bar - Hidden on Mobile for clean look */}
+      <div className="hidden sm:block bg-gray-800 dark:bg-black text-white text-xs py-2">
+        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+          <div>
+            We are available 24/7, Need help? Call Us:{" "}
+            <span className="font-bold text-green-400">+01234560352</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Link href="/about" className="hover:text-green-400 transition">
+              About Us
+            </Link>
+            <span className="text-gray-500">|</span>
+            <Link href="/contact" className="hover:text-green-400 transition">
+              Contact Us
+            </Link>
+            <span className="text-gray-500">|</span>
+            <Link href="/account" className="hover:text-green-400 transition">
+              My Account
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Main Navigation */}
-      <header className="bg-white shadow-lg sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 ">
+          <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <div className="text-2xl font-bold text-green-600">
+            <Link href="/" className="shrink-0">
+              <span className="text-2xl font-extrabold text-green-600 tracking-tight">
                 KachaBazer
-              </div>
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-6">
               {mainRoutes.map((route) => (
-                <div key={route.href} className="relative group">
+                <div key={route.label} className="relative group">
                   {route.hasDropdown ? (
-                    <>
-                      <button
-                        className="flex items-center text-gray-700 hover:text-green-600 font-medium py-2 transition-colors"
-                        onClick={() => setCategoryOpen(!categoryOpen)}
-                      >
-                        {route.label}
-                        <svg
-                          className="ml-1 w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
+                    <div className="relative">
+                      <button className="flex items-center text-gray-700 dark:text-gray-200 hover:text-green-600 font-medium py-2 transition-colors">
+                        {route.label}{" "}
+                        <ChevronDown
+                          size={14}
+                          className="ml-1 group-hover:rotate-180 transition-transform"
+                        />
                       </button>
-
-                      {/* Dropdown Menu */}
-                      <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border">
-                        {route.subRoutes?.map((subRoute) => (
+                      <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border dark:border-gray-700 z-50">
+                        {route.subRoutes?.map((sub) => (
                           <Link
-                            key={subRoute.href}
-                            href={subRoute.href}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 border-b last:border-b-0"
+                            key={sub.href}
+                            href={sub.href}
+                            className="block px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-green-50 dark:hover:bg-gray-700 hover:text-green-600 border-b dark:border-gray-700 last:border-0"
                           >
-                            {subRoute.label}
+                            {sub.label}
                           </Link>
                         ))}
                       </div>
-                    </>
+                    </div>
                   ) : (
                     <Link
                       href={route.href}
-                      className="text-gray-700 hover:text-green-600 font-medium py-2 transition-colors"
+                      className="text-gray-700 dark:text-gray-200 hover:text-green-600 font-medium transition-colors"
                     >
                       {route.label}
                     </Link>
@@ -147,310 +115,256 @@ export default function Navbar() {
               ))}
             </nav>
 
-
             {/* Search Bar - Desktop */}
-            <div className="hidden lg:flex items-center flex-1 max-w-md mx-8">
+            <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
               <div className="relative w-full">
                 <input
                   type="text"
                   placeholder="Search products..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border-none rounded-full focus:ring-2 focus:ring-green-500 outline-none transition dark:text-white"
                 />
                 <button
                   title="Search"
-                  className="absolute right-0 top-0 h-full px-4 bg-green-600 text-white rounded-r-md hover:bg-green-700 transition-colors"
+                  className="absolute right-0 top-0 h-full px-4 text-gray-500 hover:text-green-600 transition"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
+                  <Search size={18} />
                 </button>
               </div>
             </div>
 
-{/* Theme Toggle */}
+            {/* Action Icons */}
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                aria-label="Toggle theme"
                 title="Toggle theme"
-                className="w-10 h-10 flex items-center justify-center rounded-full border
-             border-gray-300 dark:border-gray-700
-             hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                aria-label="Toggle theme"
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition text-gray-600 dark:text-gray-300"
               >
                 {theme === "dark" ? (
-                  <Sun size={18} className="text-yellow-400" />
+                  <Sun size={20} className="text-yellow-400" />
                 ) : (
-                  <Moon size={18} />
+                  <Moon size={20} />
                 )}
               </button>
-            {/* Cart & User Icons + Login/Register + Profile Avatar */}
-            <div className="hidden lg:flex items-center space-x-4">
-              {/* Login and Register Buttons */}
+
+              {/* Cart */}
               <Link
-                href="/login"
-                className="px-4 py-1 border border-green-600 text-green-600 rounded hover:bg-green-50 transition"
+                href="/cart"
+                className="p-2 relative text-gray-600 dark:text-gray-300 hover:text-green-600 transition"
               >
-                Login
-              </Link>
-              <Link
-                href="/signup"
-                className="px-4 py-1 border border-green-600 text-green-600 rounded hover:bg-green-50 transition"
-              >
-                Register
+                <ShoppingCart size={22} />
+                <span className="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                  0
+                </span>
               </Link>
 
-              {/* Profile Avatar */}
-              <div className="relative">
-                <button
-                  onClick={() => setProfileOpen(!profileOpen)}
-                  className="w-10 h-10 rounded-full overflow-hidden border-2 border-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
-                  aria-label="User menu"
-                >
-                  <Image
-                    src="/default-avatar.png"
-                    alt="User Avatar"
-                    fill
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-
-                {/* Dropdown for Profile */}
-                {profileOpen && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg border z-50">
-                    <Link
-                      href="/profile"
-                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
-                      onClick={() => setProfileOpen(false)}
-                    >
-                      My Profile
-                    </Link>
-                    <Link
-                      href="/dashboard"
-                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
-                      onClick={() => setProfileOpen(false)}
-                    >
-                      Dashboard
-                    </Link>
+              {/* Login/Profile Conditional Rendering */}
+              <div className="hidden sm:flex items-center border-l dark:border-gray-700 ml-2 pl-4 space-x-3">
+                {isLoggedIn ? (
+                  <div className="relative">
                     <button
-                      onClick={() => {
-                        // এখানে লগআউট ফাংশন কল করতে পারো পরবর্তীতে
-                        alert('Logout clicked');
-                        setProfileOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      onClick={() => setProfileOpen(!profileOpen)}
+                      className="flex items-center focus:outline-none"
+                      aria-haspopup="menu"
+                      aria-expanded={profileOpen ? "true" : "false"}
+                      aria-label="Open profile menu"
+                      title="Profile menu"
                     >
-                      Logout
+                      <div className="w-9 h-9 rounded-full border-2 border-green-500 p-0.5 overflow-hidden">
+                        <Image
+                          src="/default-avatar.png"
+                          alt="User profile picture"
+                          width={36}
+                          height={36}
+                          className="rounded-full"
+                        />
+                      </div>
                     </button>
+
+                    {profileOpen && (
+                      <div className="absolute right-0 mt-3 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-2xl border dark:border-gray-700 overflow-hidden z-60">
+                        <Link
+                          href="/profile"
+                          className="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-green-50 dark:hover:bg-gray-700"
+                        >
+                          <User size={16} className="mr-2" /> My Profile
+                        </Link>
+                        <Link
+                          href="/dashboard"
+                          className="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-green-50 dark:hover:bg-gray-700 border-b dark:border-gray-700"
+                        >
+                          <LayoutDashboard size={16} className="mr-2" />{" "}
+                          Dashboard
+                        </Link>
+                        <button
+                          onClick={() => setIsLoggedIn(false)}
+                          className="flex items-center w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition"
+                        >
+                          <LogOut size={16} className="mr-2" /> Logout
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-2">
+                    <Link
+                      href="/login"
+                      className="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-green-600 transition"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/signup"
+                      className="bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-green-700 transition"
+                    >
+                      Register
+                    </Link>
                   </div>
                 )}
               </div>
 
-              {/* Cart Icon */}
+              {/* Mobile Menu Button */}
               <button
-                title="icon"
-                className="p-2 text-gray-600 hover:text-green-600 transition-colors"
+                className="lg:hidden p-2 text-gray-600 dark:text-gray-300"
+                onClick={() => setOpen(!open)}
+                aria-label={open ? "Close menu" : "Open menu"}
+                title={open ? "Close menu" : "Open menu"}
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                  />
-                </svg>
-              </button>
-
-              {/* User Icon (optional, kept from original) */}
-              <button
-                title="user icon"
-                className="p-2 text-gray-600 hover:text-green-600 transition-colors"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="lg:hidden p-2 rounded-md text-gray-600 hover:text-green-600 hover:bg-gray-100"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor">
-                  <path
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor">
-                  <path
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </button>
-          </div>
-
-          {/* Search Bar - Mobile */}
-          <div className="lg:hidden pb-4">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              />
-              <button
-                title="Search"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 bg-green-600 text-white rounded-md hover:bg-green-700"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+                {open ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {open && (
-          <div className="lg:hidden bg-white border-t border-gray-200">
-            <div className="px-4 pt-2 pb-4 space-y-2">
-              {mainRoutes.map((route) => (
-                <div key={route.href}>
-                  {route.hasDropdown ? (
-                    <>
-                      <button
-                        className="flex items-center justify-between w-full py-3 text-gray-700 font-medium border-b"
-                        onClick={() => setCategoryOpen(!categoryOpen)}
-                      >
-                        <span>{route.label}</span>
-                        <svg
-                          className={`w-4 h-4 transition-transform ${
-                            categoryOpen ? 'rotate-180' : ''
-                          }`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
-                      </button>
+        {/* Mobile Menu Sidebar */}
+        <div
+          className={`lg:hidden fixed inset-0 z-100 transform ${
+            open ? "translate-x-0" : "-translate-x-full"
+          } transition-transform duration-300 ease-in-out`}
+        >
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setOpen(false)}
+          ></div>
+          <nav className="relative w-80 h-full bg-white dark:bg-gray-900 shadow-2xl flex flex-col overflow-y-auto">
+            <div className="p-5 flex items-center justify-between border-b dark:border-gray-800">
+              <span className="text-xl font-bold text-green-600">
+                KachaBazer
+              </span>
+              <button
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+                title="Close menu"
+                className="p-1 rounded-full bg-gray-100 dark:bg-gray-800"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
+            <div className="p-4 space-y-2">
+              {/* Profile section inside mobile menu if logged in */}
+              {isLoggedIn && (
+                <div className="flex items-center p-3 bg-green-50 dark:bg-green-900/10 rounded-xl mb-4">
+                  <div className="w-12 h-12 rounded-full border-2 border-green-500 overflow-hidden">
+                    <Image
+                      src="/default-avatar.png"
+                      alt="Profile"
+                      width={48}
+                      height={48}
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-bold text-gray-800 dark:text-white">
+                      Alex Hunter
+                    </p>
+                    <Link
+                      href="/profile"
+                      className="text-xs text-green-600 font-medium"
+                    >
+                      View Profile
+                    </Link>
+                  </div>
+                </div>
+              )}
+
+              {mainRoutes.map((route) => (
+                <div key={route.label}>
+                  {route.hasDropdown ? (
+                    <div>
+                      <button
+                        onClick={() => setCategoryOpen(!categoryOpen)}
+                        className="flex items-center justify-between w-full p-3 text-gray-700 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                      >
+                        {route.label}{" "}
+                        <ChevronDown
+                          size={18}
+                          className={`${
+                            categoryOpen ? "rotate-180" : ""
+                          } transition-transform`}
+                        />
+                      </button>
                       {categoryOpen && (
-                        <div className="pl-4 space-y-2 bg-gray-50 rounded-md mt-2">
-                          {route.subRoutes?.map((subRoute) => (
+                        <div className="ml-4 mt-1 space-y-1 border-l-2 border-green-500">
+                          {route.subRoutes?.map((sub) => (
                             <Link
-                              key={subRoute.href}
-                              href={subRoute.href}
-                              className="block py-2 text-sm text-gray-600 hover:text-green-600 border-b last:border-b-0"
+                              key={sub.href}
+                              href={sub.href}
                               onClick={() => setOpen(false)}
+                              className="block p-3 text-sm text-gray-600 dark:text-gray-400 hover:text-green-600 transition"
                             >
-                              {subRoute.label}
+                              {sub.label}
                             </Link>
                           ))}
                         </div>
                       )}
-                    </>
+                    </div>
                   ) : (
                     <Link
                       href={route.href}
-                      className="block py-3 text-gray-700 font-medium border-b hover:text-green-600"
                       onClick={() => setOpen(false)}
+                      className="block p-3 text-gray-700 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"
                     >
                       {route.label}
                     </Link>
                   )}
                 </div>
               ))}
-
-              {/* Mobile Icons */}
-              <div className="flex justify-center space-x-6 pt-4 border-t">
-                <button
-                  title="icon"
-                  className="p-2 text-gray-600 hover:text-green-600"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  title="Search"
-                  className="p-2 text-gray-600 hover:text-green-600"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                </button>
-              </div>
             </div>
-          </div>
-        )}
+
+            {/* Mobile Auth/Account Actions */}
+            <div className="mt-auto p-5 border-t dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50">
+              {isLoggedIn ? (
+                <button
+                  onClick={() => {
+                    setIsLoggedIn(false);
+                    setOpen(false);
+                  }}
+                  className="flex items-center justify-center w-full py-3 bg-red-600 text-white rounded-xl font-bold shadow-lg shadow-red-600/20"
+                >
+                  <LogOut size={18} className="mr-2" /> Logout
+                </button>
+              ) : (
+                <div className="grid grid-cols-2 gap-3">
+                  <Link
+                    href="/login"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-center py-3 border border-green-600 text-green-600 rounded-xl font-bold"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/signup"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-center py-3 bg-green-600 text-white rounded-xl font-bold shadow-lg shadow-green-600/20"
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
+            </div>
+          </nav>
+        </div>
       </header>
     </>
   );
