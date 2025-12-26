@@ -1,11 +1,20 @@
-'use client';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "@/app/providers";
+
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+
+  const { theme, toggleTheme } = useTheme();
+
+
 
   // Top bar routes
   const topRoutes = [
@@ -138,6 +147,7 @@ export default function Navbar() {
               ))}
             </nav>
 
+
             {/* Search Bar - Desktop */}
             <div className="hidden lg:flex items-center flex-1 max-w-md mx-8">
               <div className="relative w-full">
@@ -167,6 +177,21 @@ export default function Navbar() {
               </div>
             </div>
 
+{/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                title="Toggle theme"
+                className="w-10 h-10 flex items-center justify-center rounded-full border
+             border-gray-300 dark:border-gray-700
+             hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+              >
+                {theme === "dark" ? (
+                  <Sun size={18} className="text-yellow-400" />
+                ) : (
+                  <Moon size={18} />
+                )}
+              </button>
             {/* Cart & User Icons + Login/Register + Profile Avatar */}
             <div className="hidden lg:flex items-center space-x-4">
               {/* Login and Register Buttons */}
