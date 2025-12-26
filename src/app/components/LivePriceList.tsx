@@ -33,7 +33,7 @@ const LivePriceList = () => {
   const [activeTab, setActiveTab] = useState("All");
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-7xl mx-auto px-4 flex gap-8">
         {/* Table Section */}
         <div className="flex-1">

@@ -38,7 +38,7 @@ const newsData: NewsItem[] = [
 
 const MarketNews = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-10">

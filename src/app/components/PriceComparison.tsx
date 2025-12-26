@@ -45,7 +45,7 @@ const PriceComparison = () => {
   const maxPrice = Math.max(...selectedProduct.prices.map((p) => p.price));
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-5xl mx-auto px-4">
         {/* Header */}
         <div className="mb-8">
@@ -62,6 +62,7 @@ const PriceComparison = () => {
           </label>
           <select
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500"
+            title="select_Product"
             value={selectedProduct.name}
             onChange={(e) =>
               setSelectedProduct(
