@@ -1,82 +1,46 @@
 'use client';
 
-import Link from "next/link";
-import { useTheme } from "@/app/providers";
-import { Sun, Moon } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 
 export default function Footer() {
-  const { theme, toggleTheme } = useTheme();
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 py-10 transition-colors">
-      <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
+    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 transition-colors">
+      <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+        
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
 
-        {/* About */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-green-900 dark:text-gray-100">
+          {/* 🔹 Left: Brand */}
+          <div className="font-bold text-lg md:text-2xl text-green-500 dark:text-green-600">
             KachaBazer
-          </h3>
-          <p className="text-sm accent dark:text-gray-400">
-            Local market prices at your fingertips. Track daily updates, compare
-            markets, and stay informed.
-          </p>
-        </div>
+          </div>
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
-            Quick Links
-          </h3>
-          <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-            <li><Link href="/" className="hover:text-green-600">Home</Link></li>
-            <li><Link href="/markets" className="hover:text-green-600">Markets</Link></li>
-            <li><Link href="/prices" className="hover:text-green-600">Prices</Link></li>
-            <li><Link href="/about" className="hover:text-green-600">About</Link></li>
-          </ul>
-        </div>
+          {/* 🔹 Center: Copyright */}
+          <div className="text-gray-700 dark:text-gray-400 text-center text-sm md:text-base">
+            © {new Date().getFullYear()} KachaBazer. All rights reserved.{" "}
+            <span className="mx-2">|</span>
+            <a href="/terms" className="hover:text-green-600">Terms</a>
+            <span className="mx-2">|</span>
+            <a href="/privacy" className="hover:text-green-600">Privacy Policy</a>
+          </div>
 
-        {/* Contact */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
-            Contact
-          </h3>
-          <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-            <li>📍 Bangladesh</li>
-            <li>📞 +880 1234-567890</li>
-            <li>✉️ support@kachabazer.com</li>
-          </ul>
-        </div>
-
-        {/* Theme Switch */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
-            Appearance
-          </h3>
-
+          {/* 🔹 Right: Scroll To Top */}
           <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border
-                       border-gray-300 dark:border-gray-700
-                       hover:bg-gray-200 dark:hover:bg-gray-800
-                       transition text-sm"
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+            title="Back to top"
+            className="w-10 h-10 flex items-center justify-center rounded-full
+                       bg-green-500 hover:bg-green-600 text-white shadow-lg
+                       transition"
           >
-            {theme === "dark" ? (
-              <>
-                <Sun size={18} /> Light Mode
-              </>
-            ) : (
-              <>
-                <Moon size={18} /> Dark Mode
-              </>
-            )}
+            <ArrowUp size={18} />
           </button>
-        </div>
-      </div>
 
-      {/* Bottom */}
-      <div className="border-t dark:border-gray-700 mt-10 pt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-        © {new Date().getFullYear()} KachaBazer. All rights reserved.
+        </div>
+
       </div>
     </footer>
   );
