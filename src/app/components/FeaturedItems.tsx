@@ -43,7 +43,7 @@ const products: Product[] = [
 
 const FeaturedItems = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="mb-8">
