@@ -55,7 +55,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 px-4 py-16">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 px-4 py-16">
       <div className="w-full max-w-6xl flex bg-white dark:bg-gray-900 rounded-2xl shadow-lg dark:shadow-gray-800/30 overflow-hidden">
         {/* Left side image */}
         <div className="hidden md:block md:w-1/2 relative">
