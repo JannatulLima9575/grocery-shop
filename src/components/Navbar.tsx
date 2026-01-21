@@ -16,15 +16,25 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 import { useTheme } from "@/app/providers";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useAuth();
+  const isLoggedIn = !!user;
 
   const { theme, toggleTheme } = useTheme();
+
+  // 🔹 Logout handler
+  const handleLogout = async () => {
+    await signOut(auth);
+    setProfileOpen(false);
+  };
 
   const mainRoutes = [
     { href: "/", label: "Home" },
@@ -44,7 +54,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Bar - Hidden on Mobile for clean look */}
+      {/* Top Bar */}
       <div className="hidden sm:block bg-gray-800 dark:bg-black text-white text-xs py-2">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div>
@@ -173,7 +183,7 @@ export default function Navbar() {
                     >
                       <div className="w-9 h-9 rounded-full border-2 border-green-500 p-0.5 overflow-hidden">
                         <Image
-                          src="/default-avatar.png"
+                          src={user?.photoURL || "/default-avatar.png"}
                           alt="User profile picture"
                           width={36}
                           height={36}
@@ -194,11 +204,10 @@ export default function Navbar() {
                           href="/dashboard"
                           className="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-green-50 dark:hover:bg-gray-700 border-b dark:border-gray-700"
                         >
-                          <LayoutDashboard size={16} className="mr-2" />{" "}
-                          Dashboard
+                          <LayoutDashboard size={16} className="mr-2" /> Dashboard
                         </Link>
                         <button
-                          onClick={() => setIsLoggedIn(false)}
+                          onClick={handleLogout}
                           className="flex items-center w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition"
                         >
                           <LogOut size={16} className="mr-2" /> Logout
@@ -249,9 +258,7 @@ export default function Navbar() {
           ></div>
           <nav className="relative w-80 h-full bg-white dark:bg-gray-900 shadow-2xl flex flex-col overflow-y-auto">
             <div className="p-5 flex items-center justify-between border-b dark:border-gray-800">
-              <span className="text-xl font-bold text-green-600">
-                KachaBazer
-              </span>
+              <span className="text-xl font-bold text-green-600">KachaBazer</span>
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
@@ -268,7 +275,7 @@ export default function Navbar() {
                 <div className="flex items-center p-3 bg-green-50 dark:bg-green-900/10 rounded-xl mb-4">
                   <div className="w-12 h-12 rounded-full border-2 border-green-500 overflow-hidden">
                     <Image
-                      src="/default-avatar.png"
+                      src={user?.photoURL || "/default-avatar.png"}
                       alt="Profile"
                       width={48}
                       height={48}
@@ -276,7 +283,7 @@ export default function Navbar() {
                   </div>
                   <div className="ml-3">
                     <p className="font-bold text-gray-800 dark:text-white">
-                      Alex Hunter
+                      {user?.displayName || "User"}
                     </p>
                     <Link
                       href="/profile"
@@ -299,9 +306,7 @@ export default function Navbar() {
                         {route.label}{" "}
                         <ChevronDown
                           size={18}
-                          className={`${
-                            categoryOpen ? "rotate-180" : ""
-                          } transition-transform`}
+                          className={`${categoryOpen ? "rotate-180" : ""} transition-transform`}
                         />
                       </button>
                       {categoryOpen && (
@@ -336,8 +341,8 @@ export default function Navbar() {
             <div className="mt-auto p-5 border-t dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50">
               {isLoggedIn ? (
                 <button
-                  onClick={() => {
-                    setIsLoggedIn(false);
+                  onClick={async () => {
+                    await signOut(auth);
                     setOpen(false);
                   }}
                   className="flex items-center justify-center w-full py-3 bg-red-600 text-white rounded-xl font-bold shadow-lg shadow-red-600/20"
