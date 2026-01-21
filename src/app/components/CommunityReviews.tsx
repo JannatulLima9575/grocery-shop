@@ -59,7 +59,7 @@ const CommunityReviews = () => {
         </div>
 
         {/* Review Form */}
-        <div className="bg-white rounded-2xl shadow-md p-6 mb-10 max-w-xl mx-auto">
+        <div className="bg-white dark:bg-gray-950 rounded-2xl text-black dark:text-white shadow-md p-6 mb-10 max-w-xl mx-auto">
           <h3 className="font-semibold mb-4">Leave a Review</h3>
 
           {/* Stars */}
@@ -98,7 +98,7 @@ const CommunityReviews = () => {
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="bg-white p-6 rounded-2xl shadow"
+              className="bg-white dark:bg-gray-950 p-6 rounded-2xl shadow"
             >
               <div className="flex items-center justify-between mb-2">
                 <h4 className="font-semibold">{review.name}</h4>
