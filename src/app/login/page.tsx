@@ -3,6 +3,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import Image from "next/image";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
 type LoginFormData = {
   email: string;
@@ -12,6 +15,7 @@ type LoginFormData = {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -19,9 +23,27 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  // design-only submit
-  const onSubmit: SubmitHandler<LoginFormData> = (data) => {
-    console.log("Login data:", data);
+  // 🔐 Email/Password Login
+  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      alert("Login successful 🎉");
+      router.push("/dashboard"); // চাইলে change করো
+    } catch (error: any) {
+      alert(error.message);
+    }
+  };
+
+  // 🔐 Google Login
+  const handleGoogleLogin = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      alert("Google login successful 🎉");
+      router.push("/dashboard");
+    } catch (error: any) {
+      alert(error.message);
+    }
   };
 
   return (
@@ -33,7 +55,7 @@ const Login = () => {
             fill
             src="/s1.jpg"
             alt="Local Market"
-            className="w-full h-full object-cover"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
             <div className="p-8">
@@ -55,7 +77,10 @@ const Login = () => {
 
           <p className="text-center text-gray-600 dark:text-gray-300 text-sm mt-2 mb-8">
             Don’t have an account?{" "}
-            <span className="text-emerald-600 dark:text-emerald-400 font-medium cursor-pointer hover:underline">
+            <span
+              onClick={() => router.push("/register")}
+              className="text-emerald-600 dark:text-emerald-400 font-medium cursor-pointer hover:underline"
+            >
               Sign up
             </span>
           </p>
@@ -136,7 +161,11 @@ const Login = () => {
 
           {/* Social Login */}
           <div className="grid grid-cols-2 gap-4">
-            <button className="py-3 border rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800">
+            <button
+              onClick={handleGoogleLogin}
+              type="button"
+              className="py-3 border rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800"
+            >
               <Image
                 src="https://www.svgrepo.com/show/355037/google.svg"
                 alt="Google"
@@ -146,7 +175,10 @@ const Login = () => {
               <span className="text-sm">Google</span>
             </button>
 
-            <button className="py-3 border rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800">
+            <button
+              type="button"
+              className="py-3 border rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 opacity-50 cursor-not-allowed"
+            >
               <Image
                 src="https://www.svgrepo.com/show/475654/apple-color.svg"
                 alt="Apple"

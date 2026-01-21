@@ -1,11 +1,7 @@
-import Dashboard from '../components/Dashboard';
+import DashboardClient from "./DashboardClient";
 
-const page = () => {
-  return (
-    <div>
-      <Dashboard></Dashboard>
-    </div>
-  );
+const Page = () => {
+  return <DashboardClient />;
 };
 
-export default page;
+export default Page;
