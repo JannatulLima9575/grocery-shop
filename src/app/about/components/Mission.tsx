@@ -5,7 +5,7 @@ export default function Mission() {
 
         {/* Vision */}
         <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
             Our Vision
           </h2>
 
@@ -17,7 +17,7 @@ export default function Mission() {
 
         {/* Mission */}
         <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
             Our Mission
           </h2>
 
