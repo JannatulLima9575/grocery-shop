@@ -23,7 +23,8 @@ const Profile = () => {
   if (!user) return null;
 
   return (
-    <div className="max-w-md mx-auto mt-16 bg-white dark:bg-gray-900 shadow-xl rounded-2xl p-6 text-center">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4">
+      <div className="max-w-md mx-auto mt-16 bg-white dark:bg-gray-900 shadow-xl rounded-2xl p-6 text-center">
       
       {/* Profile Image */}
       <div className="flex justify-center">
@@ -57,6 +58,7 @@ const Profile = () => {
             : "Google"}
         </span>
       </div>
+    </div>
     </div>
   );
 };

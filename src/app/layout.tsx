@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* 🔐 AUTH PROVIDER */}
           <AuthProvider>
             <Navbar />
-            <div className="min-h-screen">
+            <div className="min-h-screen bg-white dark:bg-gray-800">
               {children}
             </div>
             <Footer />
