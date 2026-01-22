@@ -176,8 +176,8 @@ export default function Navbar() {
                     <button
                       onClick={() => setProfileOpen(!profileOpen)}
                       className="flex items-center focus:outline-none"
-                      aria-haspopup="menu"
-                      aria-expanded={profileOpen ? "true" : "false"}
+                      aria-haspopup="menu" // note: lowercase "aria-haspopup"
+                      aria-expanded={profileOpen} // boolean value works fine
                       aria-label="Open profile menu"
                       title="Profile menu"
                     >
@@ -204,7 +204,8 @@ export default function Navbar() {
                           href="/dashboard"
                           className="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-green-50 dark:hover:bg-gray-700 border-b dark:border-gray-700"
                         >
-                          <LayoutDashboard size={16} className="mr-2" /> Dashboard
+                          <LayoutDashboard size={16} className="mr-2" />{" "}
+                          Dashboard
                         </Link>
                         <button
                           onClick={handleLogout}
@@ -258,7 +259,9 @@ export default function Navbar() {
           ></div>
           <nav className="relative w-80 h-full bg-white dark:bg-gray-900 shadow-2xl flex flex-col overflow-y-auto">
             <div className="p-5 flex items-center justify-between border-b dark:border-gray-800">
-              <span className="text-xl font-bold text-green-600">KachaBazer</span>
+              <span className="text-xl font-bold text-green-600">
+                KachaBazer
+              </span>
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"

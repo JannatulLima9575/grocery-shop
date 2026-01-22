@@ -1,9 +1,9 @@
-import Profile from '../components/Profile';
+import Profile from "../components/Profile";
 
 const page = () => {
   return (
     <div>
-      <Profile></Profile>
+      <Profile />
     </div>
   );
 };
