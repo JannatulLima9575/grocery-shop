@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   Sun,
   Moon,
@@ -21,6 +22,7 @@ import { auth } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -218,15 +220,30 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <div className="flex items-center space-x-2">
+                    {/* LOGIN */}
                     <Link
                       href="/login"
-                      className="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-green-600 transition"
+                      className={`px-5 py-2 rounded-full text-sm font-semibold transition
+      ${
+        pathname === "/login"
+          ? "bg-green-600 text-white"
+          : "text-gray-700 dark:text-gray-200 hover:text-green-600"
+      }
+    `}
                     >
                       Login
                     </Link>
+
+                    {/* REGISTER */}
                     <Link
                       href="/signup"
-                      className="bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-green-700 transition"
+                      className={`px-5 py-2 rounded-full text-sm font-semibold transition
+      ${
+        pathname === "/signup"
+          ? "bg-green-600 text-white"
+          : "border border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
+      }
+    `}
                     >
                       Register
                     </Link>

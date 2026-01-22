@@ -2,9 +2,15 @@
 
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type RegisterFormData = {
   name: string;
@@ -17,6 +23,7 @@ type RegisterFormData = {
 
 const Signup = () => {
   const router = useRouter();
+  const [error, setError] = useState("");
 
   const {
     register,
@@ -24,132 +31,161 @@ const Signup = () => {
     formState: { errors },
   } = useForm<RegisterFormData>();
 
-  // 🔐 Firebase Signup Logic
+  // 🔐 Email/Password Signup
   const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     const { name, email, password, confirmPassword, photo } = data;
 
     if (password !== confirmPassword) {
-      alert("Password and Confirm Password do not match");
+      setError("Password and Confirm Password do not match");
       return;
     }
 
     try {
-      // Create user
+      setError("");
       const result = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
 
-      // Update name & photo
       await updateProfile(result.user, {
         displayName: name,
         photoURL: photo || "",
       });
 
-      alert("Account created successfully 🎉");
-      router.push("/login");
-    } catch (error: any) {
-      alert(error.message);
+      router.push("/profile");
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  // 🔐 Google Sign In (FIXED)
+  const handleGoogleLogin = async () => {
+    try {
+      setError("");
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      router.push("/profile");
+    } catch (err: any) {
+      setError(err.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 px-4 py-16">
-      <div className="w-full max-w-6xl flex bg-white dark:bg-gray-900 rounded-2xl shadow-lg dark:shadow-gray-800/30 overflow-hidden">
-        {/* Left side image */}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 px-4 py-12">
+      <div className="w-full max-w-5xl bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden flex">
+
+        {/* LEFT IMAGE */}
         <div className="hidden md:block md:w-1/2 relative">
           <Image
-            fill
             src="/s1.jpg"
             alt="Kacha Bazar"
+            fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-            <div className="p-8">
-              <h1 className="text-3xl font-bold text-white mb-2">
-                Kacha Bazar
-              </h1>
-              <p className="text-emerald-100">
+          <div className="absolute inset-0 bg-black/50 flex items-end p-6">
+            <div>
+              <h2 className="text-2xl font-bold text-white">Kacha Bazar</h2>
+              <p className="text-sm text-gray-200">
                 Fresh from the local market to your table
               </p>
             </div>
           </div>
         </div>
 
-        {/* Right side form */}
-        <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-3xl font-bold text-center text-emerald-700">
+        {/* RIGHT FORM */}
+        <div className="w-full md:w-1/2 p-8 text-gray-900 dark:text-gray-100">
+          <h2 className="text-2xl text-center font-bold text-emerald-700 dark:text-emerald-400">
             Create an account
           </h2>
 
-          <p className="text-center text-gray-600 text-sm mt-2 mb-8">
+          <p className="text-sm text-center text-gray-600 dark:text-gray-400 mt-1 mb-6">
             Already have an account?{" "}
             <span
               onClick={() => router.push("/login")}
-              className="text-emerald-600 font-medium cursor-pointer hover:underline"
+              className="text-emerald-600 dark:text-emerald-400 font-medium cursor-pointer hover:underline"
             >
               Log in
             </span>
           </p>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Name */}
+          {error && (
+            <p className="text-red-500 text-sm text-center mb-4">{error}</p>
+          )}
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Full Name */}
             <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full px-4 py-3 border rounded-lg"
+              className="w-full px-4 py-2 border rounded-lg bg-transparent border-gray-300 dark:border-gray-700"
+              placeholder="Full name"
               {...register("name", { required: true })}
             />
 
             {/* Email */}
             <input
               type="email"
+              className="w-full px-4 py-2 border rounded-lg bg-transparent border-gray-300 dark:border-gray-700"
               placeholder="Email"
-              className="w-full px-4 py-3 border rounded-lg"
               {...register("email", { required: true })}
             />
 
-            {/* Photo */}
+            {/* Photo URL */}
             <input
-              type="text"
-              placeholder="Photo URL (optional)"
-              className="w-full px-4 py-3 border rounded-lg"
+              className="w-full px-4 py-2 border rounded-lg bg-transparent border-gray-300 dark:border-gray-700"
+              placeholder="Profile photo URL (optional)"
               {...register("photo")}
             />
 
             {/* Password */}
             <input
               type="password"
+              className="w-full px-4 py-2 border rounded-lg bg-transparent border-gray-300 dark:border-gray-700"
               placeholder="Password"
-              className="w-full px-4 py-3 border rounded-lg"
               {...register("password", { required: true })}
             />
 
             {/* Confirm Password */}
             <input
               type="password"
-              placeholder="Confirm Password"
-              className="w-full px-4 py-3 border rounded-lg"
+              className="w-full px-4 py-2 border rounded-lg bg-transparent border-gray-300 dark:border-gray-700"
+              placeholder="Confirm password"
               {...register("confirmPassword", { required: true })}
             />
 
             {/* Terms */}
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                {...register("agreeTerms", { required: true })}
-              />
-              <span className="ml-2 text-sm">I agree to terms</span>
-            </div>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" {...register("agreeTerms", { required: true })} />
+              I agree to the{" "}
+              <span className="text-emerald-600 dark:text-emerald-400">
+                Terms & Conditions
+              </span>
+            </label>
 
             <button
               type="submit"
-              className="w-full py-3 bg-emerald-500 text-white rounded-lg font-semibold"
+              className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg"
             >
               Create account
             </button>
           </form>
+
+          {/* Social */}
+          <div className="mt-6 text-center text-sm text-gray-400">
+            Or register with
+          </div>
+
+          <button
+            onClick={handleGoogleLogin}
+            className="mt-4 w-full border border-gray-300 dark:border-gray-700 rounded-lg py-2 flex items-center justify-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+          >
+            <Image
+              src="https://www.svgrepo.com/show/355037/google.svg"
+              alt="Google"
+              width={18}
+              height={18}
+            />
+            Continue with Google
+          </button>
         </div>
       </div>
     </div>

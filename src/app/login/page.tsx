@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 px-4 py-16">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 px-4 py-16">
       <div className="w-full max-w-6xl flex bg-white dark:bg-gray-900 rounded-2xl shadow-lg dark:shadow-gray-800/30 overflow-hidden">
         {/* Left Image Section */}
         <div className="hidden md:block md:w-1/2 relative">
@@ -57,7 +57,7 @@ const Login = () => {
             alt="Local Market"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end">
             <div className="p-8">
               <h1 className="text-3xl font-bold text-white mb-2">
                 Local Market Tracker
