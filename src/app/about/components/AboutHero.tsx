@@ -1,6 +1,6 @@
 export default function AboutHero() {
   return (
-    <section className="text-center px-4">
+    <section className="text-center px-4 bg-white dark:bg-gray-800">
       <h1 className="text-4xl md:text-5xl font-bold mb-4">
         About <span className="text-green-600">KachaBazer</span>
       </h1>
