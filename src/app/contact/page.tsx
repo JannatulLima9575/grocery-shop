@@ -5,7 +5,7 @@ import ContactInfo from "./components/ContactInfo";
 
 export default function ContactPage() {
   return (
-    <div className="space-y-20 py-16">
+    <div className="space-y-20 py-16 bg-white dark:bg-gray-900">
       <ContactHero />
       <ContactInfo />
       <ContactForm />
