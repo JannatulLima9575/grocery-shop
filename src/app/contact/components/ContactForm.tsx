@@ -2,11 +2,11 @@ export default function ContactForm() {
   return (
     <section className="px-4">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center mb-8">
+        <h2 className="text-3xl md:text-4xl text-black dark:text-white font-semibold text-center mb-8">
           Send Us a Message
         </h2>
 
-        <form className="space-y-6 bg-white dark:bg-carddark p-8 rounded-xl shadow">
+        <form className="space-y-6 bg-white dark:bg-gray-800 text-black dark:text-gray-300 p-8 rounded-xl shadow">
           <div>
             <label className="block text-sm font-medium mb-1">
               Your Name
@@ -15,7 +15,7 @@ export default function ContactForm() {
               type="text"
               placeholder="Enter your name"
               className="w-full px-4 py-2 border rounded-lg
-                         dark:bg-darkbg dark:border-gray-700"
+                   dark:border-gray-700"
             />
           </div>
 
@@ -27,7 +27,7 @@ export default function ContactForm() {
               type="email"
               placeholder="Enter your email"
               className="w-full px-4 py-2 border rounded-lg
-                         dark:bg-darkbg dark:border-gray-700"
+                          dark:border-gray-700"
             />
           </div>
 
@@ -39,7 +39,7 @@ export default function ContactForm() {
               rows={4}
               placeholder="Write your message..."
               className="w-full px-4 py-2 border rounded-lg
-                         dark:bg-darkbg dark:border-gray-700"
+                         dark:border-gray-700"
             />
           </div>
 
