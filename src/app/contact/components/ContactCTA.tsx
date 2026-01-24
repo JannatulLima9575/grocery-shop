@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function ContactCTA() {
   return (
-    <section className="text-center px-4">
-      <h2 className="text-3xl font-semibold mb-4">
+    <section className="text-center px-4 py-16 text-black dark:text-white">
+      <h2 className="text-3xl md:text-4xl font-semibold mb-4">
         Want to explore local markets?
       </h2>
 
