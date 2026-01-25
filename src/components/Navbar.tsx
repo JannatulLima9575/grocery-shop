@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import {
   Sun,
   Moon,
@@ -26,6 +27,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
 
   const { user } = useAuth();
   const isLoggedIn = !!user;
@@ -54,6 +56,15 @@ export default function Navbar() {
     { href: "/products", label: "Products" },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 120);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       {/* Top Bar */}
@@ -80,7 +91,11 @@ export default function Navbar() {
       </div>
 
       {/* Main Navigation */}
-      <header className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50">
+      <header
+        className={`bg-white dark:bg-gray-900 z-50 transition-all duration-300
+  ${isSticky ? "fixed top-0 left-0 w-full shadow-xl" : "relative"}
+`}
+      >
         <div className="max-w-7xl mx-auto px-4 ">
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
