@@ -48,7 +48,7 @@ const FeaturedItems = () => {
         {/* Header */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold">Featured & Popular Items</h2>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             Most viewed and frequently updated market products
           </p>
         </div>
@@ -58,7 +58,7 @@ const FeaturedItems = () => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="min-w-[260px] bg-white rounded-2xl shadow hover:shadow-lg transition"
+              className="min-w-65 bg-white dark:bg-gray-800 rounded-2xl shadow hover:shadow-lg transition"
             >
               <div className="relative h-40 w-full rounded-t-2xl overflow-hidden">
                 <Image

@@ -13,8 +13,8 @@ export default function Home() {
         <Banner/>
         <MarketHighlights />
         <LivePriceList />
-        <PriceComparison/>
         <FeaturedItems/>
+        <PriceComparison/>
         <MarketNews/>
         <CommunityReviews/>
       </div>
