@@ -39,6 +39,13 @@ const products: Product[] = [
     market: "Local Wholesale",
     image: "/Hero/BasmatiRice.png",
   },
+  {
+    id: 5,
+    name: "Basmati Rice",
+    price: "৳95 / kg",
+    market: "Local Wholesale",
+    image: "/Hero/BasmatiRice.png",
+  },
 ];
 
 const FeaturedItems = () => {
